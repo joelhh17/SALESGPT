@@ -1,0 +1,388 @@
+:root {
+    --bg: #121212;
+    --text: #fff;
+    --accent: #1e1e1e;
+}
+
+body.light { --bg: #fff; --text: #000; --accent: #f2f2f2; }
+body.oled { --bg: #000; --text: #fff; --accent: #0a0a0a; }
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* SIDEBAR */
+.sidebar {
+    width: 200px;
+    background: var(--accent);
+    padding: 1rem;
+    border-right: 1px solid #333;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-top.horizontal {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.logo.centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0; 
+}
+
+.logo img {
+    width: 28px;
+    height: 28px;
+}
+
+.new-chat {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid #555;
+    border-radius: 5px;
+    padding: 6px 10px;  
+    margin: 0;           
+    flex-shrink: 0;      
+}
+
+/* CHAT LIST */
+.chat-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+/* CHAT ITEM (full row) */
+.chat-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px;
+    border-radius: 6px;
+    position: relative;
+}
+
+/* CHAT BUTTON (the name of the chat) */
+.chat-btn {
+    background: transparent;
+    border: none;
+    color: var(--text);
+    text-align: left;
+    padding: 6px 8px;
+    cursor: pointer;
+    border-radius: 4px;
+    flex: 1;
+    transition: background 0.2s ease;
+}
+
+.chat-btn:hover {
+    background-color: #333;
+}
+
+/* THREE DOTS BUTTON */
+.menu-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: var(--text);
+    opacity: 0.7;
+    padding: 4px;
+}
+
+.menu-btn:hover {
+    opacity: 1;
+}
+
+/* CONTEXTUAL MENU */
+.chat-menu {
+    position: absolute;
+    right: 0;
+    top: 28px;
+    background: var(--accent);
+    border: 1px solid #444;
+    border-radius: 6px;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    width: 120px;
+    z-index: 10;
+}
+
+/* HIDDEN MENU */
+.chat-menu.hidden {
+    display: none;
+}
+
+/* MENU BUTTONS */
+.chat-menu button {
+    background: transparent;
+    border: none;
+    color: var(--text);
+    text-align: left;
+    padding: 4px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.chat-menu button:hover {
+    background: #333;
+}
+
+
+/* MAIN */
+.main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* HEADER */
+.header {
+    background: var(--accent);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.6rem 1rem;
+    border-bottom: 1px solid #333;
+}
+
+.header-left, .header-right {
+    display: flex;
+    gap: 10px;
+}
+
+.header-center {
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.header-center h1 {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: normal;
+}
+
+.header-center p {
+    margin: 0;
+    font-size: 0.8rem;
+    opacity: 0.6;
+}
+
+/* SETTINGS MENU */
+.settings-menu {
+    position: absolute;
+    top: 55px;
+    right: 20px;
+    background: var(--accent);
+    border: 1px solid #444;
+    border-radius: 6px;
+    padding: 10px;
+    z-index: 10;
+}
+
+.hidden { display: none; }
+
+/* PROMPT SUGGESTIONS */
+.prompt-suggestions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 2rem;
+    opacity: 0.8;
+}
+
+.prompt-suggestions button {
+    background: transparent;
+    border: 1px solid #555;
+    color: var(--text);
+    padding: 5px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.prompt-suggestions button:hover { background: #333; }
+
+/* CHAT */
+.chat-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centers when empty */
+    padding: 1rem;
+    overflow: hidden;
+    transition: justify-content 0.3s ease;
+}
+
+.chat-container {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.message {
+    max-width: 80%;
+    padding: 10px;
+    border-radius: 8px;
+    position: relative;
+}
+
+.user { align-self: flex-end; background: #2a2a2a; }
+.bot { align-self: flex-start; background: #1e1e1e; }
+
+.timestamp {
+    font-size: 0.7rem;
+    color: #aaa;
+    position: absolute;
+    bottom: -15px;
+    right: 5px;
+}
+
+/* TYPING ANIMATION */
+.typing {
+    font-style: italic;
+    opacity: 0.7;
+    font-size: 0.9rem;
+}
+
+.typing .dots::after {
+    content: '...';
+    animation: dots 1s steps(3, end) infinite;
+}
+
+/* --- Header Buttons --- */
+.icon-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon {
+    font-size: 1.2rem;
+    color: var(--text);
+    opacity: 0.8;
+    transition: opacity 0.2s ease;
+}
+
+.icon-btn:hover .icon {
+    opacity: 1;
+}
+
+.new-chat {
+    flex: none;
+    margin: 0;
+}
+
+.rename-input {
+    background: transparent;
+    border: 1px solid #555;
+    color: var(--text);
+    padding: 4px 6px;
+    border-radius: 4px;
+    width: 100%;
+    outline: none;
+}
+
+
+
+
+@keyframes dots {
+    0% { content: ''; }
+    33% { content: '.'; }
+    66% { content: '..'; }
+    100% { content: '...'; }
+}
+
+/* INPUT */
+.input-area {
+    display: flex;
+    gap: 10px;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+textarea {
+    flex: 1;
+    min-height: 40px;
+    max-height: 150px;
+    resize: none;
+    padding: 12px;
+    border-radius: 6px;
+    border: 1px solid #444;
+    background: var(--accent);
+    color: var(--text);
+    outline: none; 
+    transition: border 0.2s ease, box-shadow 0.2s ease;
+}
+
+textarea:focus {
+    border: 1px solid #444;
+}
+
+/* SEND BUTTON */
+.send-btn {
+    background: white !important;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.send-btn:hover {
+    background: #eaeaea;
+}
+
+/* Estilo del ícono Lucide */
+.send-btn i {
+    width: 18px;
+    height: 18px;
+    stroke: black !important;
+    stroke-width: 2;
+}
+
+.message.bot {
+    white-space: pre-wrap;
+  }
+  
+/* RESPONSIVE */
+@media screen and (max-width: 768px) {
+    .sidebar { display: none; }
+    .main { width: 100%; }
+}

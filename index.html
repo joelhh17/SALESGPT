@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Sales Agent</title>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="style2.css" />
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+    <div class="sidebar-top horizontal">
+        <div class="logo">
+            <img src="Picture/F5-Logo-1.png" alt="F5 Logo" />
+        </div>
+        <button class="new-chat" onclick="createNewChat()">＋ New Chat</button>
+    </div>
+
+    <!--DYNAMIC  CHAT-->
+    <div id="chat-list" class="chat-list"></div>
+</aside>
+
+    <!-- MAIN -->
+    <main class="main">
+
+        <!-- HEADER -->
+        <header class="header">
+            <div class="header-left">
+                <button class="icon-btn" onclick="toggleSidebar()">
+                    <span class="icon">&#9776;</span> <!-- hamburger -->
+                </button>
+            </div>
+            <div class="header-center">
+                <h1>Business Analytics AI</h1>
+                <p>Mistral-7B-v0.3</p>
+            </div>
+            <div class="header-right">
+                <button class="icon-btn" onclick="toggleSettings()">
+                    <span class="icon">&#8942;</span> <!-- vertical dots -->
+                </button>
+                <button class="icon-btn" onclick="toggleThemeMenu()">
+                    <span class="icon">&#9881;</span> <!-- gear -->
+                </button>
+ 
+            </div>
+        </header>        
+        
+
+        <!-- SETTINGS MENU -->
+        <div id="settings-menu" class="settings-menu hidden">
+            <label for="themeSelector">Theme:</label>
+            <select id="themeSelector" onchange="changeTheme()">
+                <option value="system">System</option>
+                <option value="light">Light</option>
+                <option value="dark">Dark</option>
+                <option value="oled">OLED Dark</option>
+            </select>
+        </div>
+
+        <!-- PROMPT SUGGESTIONS -->
+        <div id="prompt-suggestions" class="prompt-suggestions">
+            <p>Try one of these:</p>
+            <button onclick="suggestPrompt('What is BIG-IP?')">What is the difference between HTTP and HTTPS?</button>
+            <button onclick="suggestPrompt('Explain Load Balancing in simple terms.')">Explain Load Balancing in simple terms.</button>
+            <button onclick="suggestPrompt('How does SSL/TLS work?')">How does SSL/TLS work?</button>
+        </div>
+
+        <!-- CHAT AREA -->
+        <section class="chat-area" id="chat-area">
+            <div id="chat-container" class="chat-container"></div>
+            <div id="typing" class="typing hidden">Sales Agent is typing<span class="dots">...</span></div>
+            <div class="input-area" id="input-area">
+                <textarea id="question" placeholder="Send a message..." oninput="autoResize(this)"></textarea>
+                <button class="send-btn" onclick="ask()">
+                    <i data-lucide="arrow-up"></i>
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+        });
+    </script>
+    
+</body>
+
+</html>
+
