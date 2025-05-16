@@ -23,7 +23,7 @@ async function ask() {
 
     try {
         // Replace with your actual ngrok URL
-        const response = await fetch("https://5033-2806-103e-2a-323d-3593-2a3f-c0d6-68d9.ngrok-free.app/query", {
+        const response = await fetch("https://9169-20-3-64-143.ngrok-free.app/query", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
